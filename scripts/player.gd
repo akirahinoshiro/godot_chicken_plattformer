@@ -10,13 +10,13 @@ const V_LOOK_SENS = 1.0
 
 onready var cam = $CamBase
 onready var anim = $chickenV2/AnimationPlayer
-
+onready var label = $Control/HBoxContainer/Label
 
 var y_velo = 0
 var dead = false
 
 func _ready():
-	$Control.visible = false
+	label.visible = true
 #	anim.get_animation("Idle1").set_loop(true)
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -27,7 +27,9 @@ func _ready():
 		#rotation_degrees.y -= event.relative.x * H_LOOK_SENS
 
 func _physics_process(_delta):
-	if !dead:
+	if !dead:		
+		var fps = Engine.get_frames_per_second()
+		label.set_text(str(fps))
 		var move_vec = Vector3()
 		if Input.is_action_pressed("move_forwards"):
 			move_vec.z -= 1
@@ -64,7 +66,8 @@ func _physics_process(_delta):
 		if (global_transform.origin.y < -100 and !dead):
 			play_anim("Dying")
 			dead = true
-			$Control.visible = true
+			label.visible = true
+			label.set_text("YOU ARE DEAD!")
 
 func play_anim(name):
 	if anim.current_animation == name:
