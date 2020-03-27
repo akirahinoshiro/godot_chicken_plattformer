@@ -27,7 +27,7 @@ func _ready():
 		#rotation_degrees.y -= event.relative.x * H_LOOK_SENS
 
 func _physics_process(_delta):
-	if !dead:		
+	if !dead:
 		var fps = Engine.get_frames_per_second()
 		label.set_text(str(fps))
 		var move_vec = Vector3()
