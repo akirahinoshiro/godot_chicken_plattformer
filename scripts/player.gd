@@ -11,11 +11,13 @@ const V_LOOK_SENS = 1.0
 onready var cam = $CamBase
 onready var anim = $chickenV2/AnimationPlayer
 
+
 var y_velo = 0
 var dead = false
 
 func _ready():
-	anim.get_animation("Idle1").set_loop(true)
+	$Control.visible = false
+#	anim.get_animation("Idle1").set_loop(true)
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 #func _input(event):
@@ -24,7 +26,7 @@ func _ready():
 		#cam.rotation_degrees.x = clamp(cam.rotation_degrees.x, -90, 90)
 		#rotation_degrees.y -= event.relative.x * H_LOOK_SENS
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !dead:
 		var move_vec = Vector3()
 		if Input.is_action_pressed("move_forwards"):
@@ -62,6 +64,7 @@ func _physics_process(delta):
 		if (global_transform.origin.y < -100 and !dead):
 			play_anim("Dying")
 			dead = true
+			$Control.visible = true
 
 func play_anim(name):
 	if anim.current_animation == name:
