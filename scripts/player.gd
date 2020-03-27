@@ -58,9 +58,13 @@ func _physics_process(delta):
 		else:
 			play_anim("Walk")
 	if (global_transform.origin.y < -100):
-		play_anim("Dying")
+		death()
 
 func play_anim(name):
 	if anim.current_animation == name:
 		return
 	anim.play(name)
+	
+func death():
+	play_anim("Dying")
+	
