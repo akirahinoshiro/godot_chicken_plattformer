@@ -33,12 +33,16 @@ func _physics_process(_delta):
 		var move_vec = Vector3()
 		if Input.is_action_pressed("move_forwards"):
 			move_vec.z -= 1
+			$chickenV2.set_rotation_degrees(Vector3(0,180,0))
 		if Input.is_action_pressed("move_backwards"):
 			move_vec.z += 1
+			$chickenV2.set_rotation_degrees(Vector3(0,0,0))
 		if Input.is_action_pressed("move_right"):
-			move_vec.x += 1
+			move_vec.x += 1			
+			$chickenV2.set_rotation_degrees(Vector3(0,90,0))
 		if Input.is_action_pressed("move_left"):
-			move_vec.x -= 1
+			move_vec.x -= 1			
+			$chickenV2.set_rotation_degrees(Vector3(0,270,0))
 		move_vec = move_vec.normalized()
 		move_vec = move_vec.rotated(Vector3(0, 1, 0), rotation.y)
 		move_vec *= MOVE_SPEED
@@ -57,19 +61,19 @@ func _physics_process(_delta):
 			y_velo = -MAX_FALL_SPEED
 	
 		if just_jumped:
-			play_anim("jump")
+			play_anim("BeginPecking", -1, 1)
 		elif grounded:
 			if move_vec.x == 0 and move_vec.z == 0:
-				play_anim("Idle1")
+				play_anim("Idle1", -1, 1)
 			else:
-				play_anim("Walk")
+				play_anim("Walk", -1, 20.0)
 		if (global_transform.origin.y < -100 and !dead):
-			play_anim("Dying")
+			play_anim("Dying", -1, 1)
 			dead = true
 			label.visible = true
 			label.set_text("YOU ARE DEAD!")
 
-func play_anim(name):
+func play_anim(name, blend, custom_speed):
 	if anim.current_animation == name:
 		return
-	anim.play(name)
+	anim.play(name, blend, custom_speed)
