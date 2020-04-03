@@ -8,9 +8,9 @@
 [sub_resource type="CapsuleShape" id=1]
 height = 0.002
 
-[sub_resource type="Skin" id=3]
+[sub_resource type="Skin" id=2]
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=3]
 
 [node name="player" type="KinematicBody"]
 script = ExtResource( 2 )
@@ -36,8 +36,8 @@ use_in_baked_light = true
 material/0 = ExtResource( 3 )
 
 [node name="Eyes" parent="chickenV2/Armature/Skeleton" index="1"]
-skin = SubResource( 3 )
-material/0 = SubResource( 4 )
+skin = SubResource( 2 )
+material/0 = SubResource( 3 )
 
 [node name="Camera" parent="chickenV2" index="1"]
 visible = false
