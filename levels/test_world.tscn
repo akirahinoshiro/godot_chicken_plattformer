@@ -1,26 +1,33 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://characters/chicken/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sky/20180311_160024.jpg" type="Texture" id=2]
+[ext_resource path="res://particles/fire/fire01.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CubeMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
+flags_use_shadow_to_opacity = true
 albedo_color = Color( 0.592157, 0.121569, 0.121569, 1 )
 
 [sub_resource type="ConcavePolygonShape" id=3]
 data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[sub_resource type="PanoramaSky" id=5]
+[sub_resource type="PanoramaSky" id=4]
 radiance_size = 0
 panorama = ExtResource( 2 )
 
-[sub_resource type="Environment" id=4]
+[sub_resource type="Environment" id=5]
 background_mode = 2
-background_sky = SubResource( 5 )
+background_sky = SubResource( 4 )
 background_sky_orientation = Basis( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
 
 [node name="test_world" type="Spatial"]
+
+[node name="fire01" parent="." instance=ExtResource( 3 )]
 
 [node name="player" parent="." instance=ExtResource( 1 )]
 
@@ -37,4 +44,4 @@ material/0 = SubResource( 2 )
 shape = SubResource( 3 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 4 )
+environment = SubResource( 5 )
