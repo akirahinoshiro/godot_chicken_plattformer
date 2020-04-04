@@ -11,6 +11,7 @@ const V_LOOK_SENS = 1.0
 onready var cam = $CamBase
 onready var anim = $chickenV2/AnimationPlayer
 onready var label = $Control/HBoxContainer/Label
+var velocity = 0
 
 var y_velo = 0
 var dead = false
@@ -47,7 +48,7 @@ func _physics_process(_delta):
 		move_vec = move_vec.rotated(Vector3(0, 1, 0), rotation.y)
 		move_vec *= MOVE_SPEED
 		move_vec.y = y_velo
-		move_and_slide(move_vec, Vector3(0, 1, 0))
+		velocity = move_and_slide(move_vec, Vector3(0, 1, 0))
 	
 		var grounded = is_on_floor()
 		y_velo -= GRAVITY
